@@ -7,9 +7,16 @@ using StaticArrays
 using Test
 
 
-ESCHER.vectorized(::MatrixGame, I) = SA[Float32(I)]
+ESCHER.vectorized(::MatrixGame, I::Int) = SA[Float32(I)]
+ESCHER.vectorized(::MatrixGame, h) = h
 
 function ESCHER.vectorized(game::Kuhn, I)
+    p, pc, hist = I
+    h = convert(SVector{3,Float32}, hist)
+    SA[Float32(p), Float32(pc), h...]
+end
+
+function ESCHER.vectorized(game::Kuhn, h::KuhnHist)
     p, pc, hist = I
     h = convert(SVector{3,Float32}, hist)
     SA[Float32(p), Float32(pc), h...]
