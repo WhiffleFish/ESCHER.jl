@@ -7,7 +7,7 @@ using ProgressMeter
 using Random
 using Flux
 
-export ESCHERSolver
+export ESCHERSolver, TabularESCHERSolver
 
 include("solver.jl")
 include("buffer.jl")
@@ -16,5 +16,6 @@ include("train.jl")
 include("callback.jl")
 include("fitting.jl")
 include("value.jl")
+include("tabular.jl")
 
 end # module

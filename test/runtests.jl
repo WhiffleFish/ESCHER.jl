@@ -8,3 +8,4 @@ using Test
 
 include("smoke.jl")
 include("value.jl")
+include("tabular.jl")

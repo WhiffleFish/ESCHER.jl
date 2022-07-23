@@ -89,7 +89,7 @@ function regret_traverse(sol::ESCHERSolver, h, p)
 end
 
 
-function child_value(sol, p, h, a)
+function child_value(sol::ESCHERSolver, p, h, a)
     h′ = next_hist(sol.game, h, a)
     return if isterminal(sol.game, h′)
         utility(sol.game, p, h′)
@@ -98,17 +98,20 @@ function child_value(sol, p, h, a)
     end
 end
 
-function regret_match_strategy(sol, p, I)
-    r = regret(sol, p, I)
-    s = 0.0f0
+function regret_match_strategy(sol::ESCHERSolver, p, I)
+    return regret_match!(regret(sol, p, I))
+end
+
+function regret_match!(r::AbstractVector{T}) where T
+    s = zero(T)
     for i ∈ eachindex(r)
-        if r[i] > 0.0f0
+        if r[i] > zero(T)
             s += r[i]
         else
-            r[i] = 0.0f0
+            r[i] = zero(T)
         end
     end
-    return s > 0.0f0 ? (r ./= s) : fill!(r,1/length(r))
+    return s > zero(T) ? (r ./= s) : fill!(r,inv(length(r)))
 end
 
 function weighted_sample(rng::Random.AbstractRNG, σ::AbstractVector)

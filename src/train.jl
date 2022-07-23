@@ -34,6 +34,7 @@ function traverse_value!(sol)
 end
 
 function train_value!(sol)
+    sol.exact_value && return
     buff = sol.value_buffer
     train_net!(sol.value, buff.x, buff.y, sol.value_batch_size, sol.value_batches, deepcopy(sol.optimizer))
 end

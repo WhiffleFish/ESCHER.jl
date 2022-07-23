@@ -1,4 +1,4 @@
-function exact_value(sol, h)
+function exact_value(sol::ESCHERSolver, h)
     game = sol.game
     p = player(game, h)
     if isterminal(game, h)
@@ -22,7 +22,7 @@ function exact_value(sol, h)
     end
 end
 
-function exact_action_values(sol, h)
+function exact_action_values(sol::ESCHERSolver, h)
     A = actions(sol.game, h)
     q = zeros(length(A))
     for i in eachindex(A)

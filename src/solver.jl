@@ -21,6 +21,7 @@ Base.@kwdef struct ESCHERSolver{G,V,R,S,VB,RB,SB,SP,OPT,RNG<:AbstractRNG} <: CFR
     optimizer::OPT = Adam(1e-3)
     ϵ::Float64 = 0.3
     rng::RNG = Random.default_rng()
+    exact_value::Bool = false
 end
 
 function ESCHERSolver(game::Game{H,K};
